@@ -162,7 +162,7 @@ It should <b>NOT be used for real medical diagnosis</b>.
 <h2>👨‍💻 Author</h2>
 
 <p>
-<b>Anurag Tiwari</b>
+
   <b>Anshika Agrawal</b>
    <b>Anshika Rai</b>
   <b>Anurag Tiwari</b>
