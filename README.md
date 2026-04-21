@@ -114,6 +114,10 @@ pip install -r requirements.txt
 Recommended Python version: 3.11. The pinned NumPy and scikit-learn wheels in this project are not compatible with Python 3.14 on Windows.
 </p>
 
+<p>
+For Streamlit Community Cloud, this repository includes <code>runtime.txt</code> pinned to Python 3.11.9 so dependency installation uses a compatible interpreter.
+</p>
+
 <h3>3️⃣ Run App</h3>
 
 <pre>
@@ -126,6 +130,15 @@ python -m streamlit run app.py
 <p>
 The app opens in your browser as a local Streamlit webpage. Use the sidebar to choose a disease and enter the trained model inputs.
 </p>
+
+<h3>Deploy to Streamlit Cloud</h3>
+
+<ol>
+  <li>Push the latest code to GitHub on the <code>main</code> branch.</li>
+  <li>Open <code>share.streamlit.io</code> and connect your GitHub account.</li>
+  <li>Select this repository, choose <code>main</code>, and set the main file path to <code>app.py</code>.</li>
+  <li>Deploy and share the generated app URL with anyone.</li>
+</ol>
 
 <hr>
 
