@@ -60,7 +60,7 @@ Built using <b>Streamlit</b>, the app provides a simple UI where users can input
 
 <pre>
 📁 multiple-disease-prediction
-│── main.py
+│── app.py
 │── requirements.txt
 │── README.md
 │
@@ -110,11 +110,22 @@ cd multiple-disease-prediction
 pip install -r requirements.txt
 </pre>
 
+<p>
+Recommended Python version: 3.11. The pinned NumPy and scikit-learn wheels in this project are not compatible with Python 3.14 on Windows.
+</p>
+
 <h3>3️⃣ Run App</h3>
 
 <pre>
-streamlit run main.py
+streamlit run app.py
+
+# or, if Streamlit is not on PATH
+python -m streamlit run app.py
 </pre>
+
+<p>
+The app opens in your browser as a local Streamlit webpage. Use the sidebar to choose a disease and enter the trained model inputs.
+</p>
 
 <hr>
 
