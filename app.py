@@ -114,7 +114,13 @@ def load_models():
 
 
 def predict_label(model, values):
-    return model.predict([values])[0]
+    if model is None:
+        return None
+    try:
+        return model.predict([values])[0]
+    except Exception as e:
+        st.error(f"Prediction error: {e}")
+        return None
 
 
 diabetes_model, heart_disease_model, parkinsons_model = load_models()
@@ -252,10 +258,13 @@ if selected == "Diabetes Prediction":
         ]
         prediction = predict_label(diabetes_model, user_input)
 
-        if prediction == 1:
-            st.success("The person is diabetic.")
+        if prediction is None:
+            st.error("Diabetes model unavailable or prediction failed. Check logs.")
         else:
-            st.success("The person is not diabetic.")
+            if prediction == 1:
+                st.success("The person is diabetic.")
+            else:
+                st.success("The person is not diabetic.")
 
 
 if selected == "Heart Disease Prediction":
@@ -328,10 +337,13 @@ if selected == "Heart Disease Prediction":
         ]
         prediction = predict_label(heart_disease_model, user_input)
 
-        if prediction == 1:
-            st.success("The person is having heart disease.")
+        if prediction is None:
+            st.error("Heart disease model unavailable or prediction failed. Check logs.")
         else:
-            st.success("The person does not have any heart disease.")
+            if prediction == 1:
+                st.success("The person is having heart disease.")
+            else:
+                st.success("The person does not have any heart disease.")
 
 
 if selected == "Parkinson's Prediction":
@@ -436,7 +448,10 @@ if selected == "Parkinson's Prediction":
         ]
         prediction = predict_label(parkinsons_model, user_input)
 
-        if prediction == 1:
-            st.success("The person has Parkinson's disease.")
+        if prediction is None:
+            st.error("Parkinson's model unavailable or prediction failed. Check logs.")
         else:
-            st.success("The person does not have Parkinson's disease.")
+            if prediction == 1:
+                st.success("The person has Parkinson's disease.")
+            else:
+                st.success("The person does not have Parkinson's disease.")
