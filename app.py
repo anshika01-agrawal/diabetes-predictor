@@ -102,7 +102,7 @@ with st.sidebar:
             "Home",
             "Diabetes Prediction",
             "Heart Disease Prediction",
-            "Parkinsons Prediction",
+            "Parkinson's Prediction",
         ],
         menu_icon="hospital-fill",
         icons=["house", "activity", "heart", "person"],
@@ -274,7 +274,7 @@ if selected == "Heart Disease Prediction":
             slope = st.number_input("Slope of the peak exercise ST segment", value=0.0, step=1.0)
 
         with col3:
-            ca = st.number_input("Major vessels colored by flourosopy", value=0.0, step=1.0)
+            ca = st.number_input("Major vessels colored by fluoroscopy", value=0.0, step=1.0)
 
         with col1:
             thal = st.number_input(
@@ -309,7 +309,7 @@ if selected == "Heart Disease Prediction":
             st.success("The person does not have any heart disease.")
 
 
-if selected == "Parkinsons Prediction":
+if selected == "Parkinson's Prediction":
     st.title("Parkinson's Disease Prediction using ML")
     st.caption("Use the numeric voice-measurement features from the Parkinson's dataset.")
 
