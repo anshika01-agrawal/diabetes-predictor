@@ -86,14 +86,29 @@ MODEL_DIR = os.path.join(WORKING_DIR, "saved_models")
 
 @st.cache_resource
 def load_models():
-    with open(os.path.join(MODEL_DIR, "diabetes_model.sav"), "rb") as file:
-        diabetes_model = pickle.load(file)
+    diabetes_model = heart_disease_model = parkinsons_model = None
 
-    with open(os.path.join(MODEL_DIR, "heart_disease_model.sav"), "rb") as file:
-        heart_disease_model = pickle.load(file)
+    def _safe_load(path):
+        if not os.path.exists(path):
+            return None, f"missing file: {path}"
+        try:
+            with open(path, "rb") as file:
+                return pickle.load(file), None
+        except Exception as e:
+            return None, str(e)
 
-    with open(os.path.join(MODEL_DIR, "parkinsons_model.sav"), "rb") as file:
-        parkinsons_model = pickle.load(file)
+    diabetes_path = os.path.join(MODEL_DIR, "diabetes_model.sav")
+    heart_path = os.path.join(MODEL_DIR, "heart_disease_model.sav")
+    parkinsons_path = os.path.join(MODEL_DIR, "parkinsons_model.sav")
+
+    diabetes_model, err1 = _safe_load(diabetes_path)
+    heart_disease_model, err2 = _safe_load(heart_path)
+    parkinsons_model, err3 = _safe_load(parkinsons_path)
+
+    errors = [e for e in (err1, err2, err3) if e]
+    if errors:
+        # Surface a clear message in the app logs/UI rather than letting Streamlit crash with a red traceback.
+        st.error("Model load issues:\n" + "\n".join(errors))
 
     return diabetes_model, heart_disease_model, parkinsons_model
 
