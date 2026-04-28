@@ -1,6 +1,7 @@
 import os
 import pickle
 
+import pandas as pd
 import streamlit as st
 
 # Provide a lightweight fallback for `option_menu` so the app
@@ -117,7 +118,11 @@ def predict_label(model, values):
     if model is None:
         return None
     try:
-        return model.predict([values])[0]
+        if hasattr(model, "feature_names_in_"):
+            input_data = pd.DataFrame([values], columns=model.feature_names_in_)
+        else:
+            input_data = [values]
+        return model.predict(input_data)[0]
     except Exception as e:
         st.error(f"Prediction error: {e}")
         return None
