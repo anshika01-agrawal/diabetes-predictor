@@ -2,7 +2,17 @@ import os
 import pickle
 
 import streamlit as st
-from streamlit_option_menu import option_menu
+
+# Provide a lightweight fallback for `option_menu` so the app
+# still works on deployments where `streamlit-option-menu` may
+# not have been installed for any reason. The fallback simply
+# returns a `st.selectbox` value and matches the original
+# function signature used in this app.
+try:
+    from streamlit_option_menu import option_menu
+except Exception:
+    def option_menu(title, options, icons=None, menu_icon=None, default_index=0):
+        return st.selectbox(title, options, index=default_index)
 
 
 st.set_page_config(
